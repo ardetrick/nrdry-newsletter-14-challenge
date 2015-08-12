@@ -15,13 +15,13 @@ public class ChallengeAccepted {
 
 	public void countSundays() {
 		Observable<Integer> months = Observable.range(Month.JANUARY.getValue(), 12); 	// emit 12 values starting with January
-		Observable<Integer> years = Observable.range(1901, 100); 						// emit 100 values starting with 1901
+		Observable<Integer> years = Observable.range(1901, 100); 			// emit 100 values starting with 1901
 
 		Observable<Integer> totalCount = years
 				.flatMap(year -> months.map(month -> new Pair<Integer,Integer>(year, month)))	// take Cartesian product of month and year range
-				.filter(yearAndMonth -> isSundayFunday(yearAndMonth))							// filter out undesirable dates
-				//.doOnNext(System.out::println)												// print them, if you want
-				.count();																		// count em up!
+				.filter(yearAndMonth -> isSundayFunday(yearAndMonth))				// filter out undesirable dates
+				//.doOnNext(System.out::println)						// print them, if you want
+				.count();									// count em up!
 
 		totalCount.subscribe(System.out::println); 		// and the total is...!
 	}
